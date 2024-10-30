@@ -13,20 +13,15 @@
     <table border='1px solid black'>
     <tr>
         <th>Número generado</th>
-        <th>x0</th>
-        <th>x1</th>
-        <th>x2</th>
-        <th>x3</th>
-        <th>x4</th>
-        <th>x5</th>
-        <th>x6</th>
-        <th>x7</th>
-        <th>x8</th>
-        <th>x9</th>
-        <th>x10</th>
+    ";
+    for ($i = 0; $i < 11; $i++) {
+        echo "<th>x$i</th>";
+    }
+    echo "
     </tr>
     <tr>
-        <td>$numeroAleatorio</td>";
+        <td>$numeroAleatorio</td>
+    ";
     for ($i = 0; $i < 11; $i++) {
         echo "<td>$array[$i]";
     }
