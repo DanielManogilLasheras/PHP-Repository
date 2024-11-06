@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <form id="form" action="data.php" method="post">
+      <h1>BASIC FORMULARY:</h1>
+      <label for="name">Name:</label>
+      <input type="text" name="name" placeholder="Input name" />
+      <label for="surname">Surname:</label>
+      <input type="text" name="surname" placeholder="Input surname" /><br />
+      <label>Mis intereses: </label><br />
+      <input type="checkbox" name="interest[]" value="Sports" />Sports<br />
+      <input type="checkbox" name="interest[]" value="Music" />Music<br />
+      <input type="checkbox" name="interest[]" value="Books" />Books<br />
+      <input type="checkbox" name="interest[]" value="Cinema" />Cinema<br />
+      <button type="submit" value="Send">Send</button>
+    </form>
+  </body>
+</html>

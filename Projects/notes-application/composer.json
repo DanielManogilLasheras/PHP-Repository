@@ -1,0 +1,15 @@
+{
+    "name": "dmano/notes",
+    "autoload": {
+        "psr-4": {
+            "Dmano\\Notes\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "\"Daniel Manogil Lasheras\"",
+            "email": "daniel9alc@gmail.com"
+        }
+    ],
+    "require": {}
+}
