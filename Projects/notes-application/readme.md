@@ -1,7 +1,7 @@
 * This project is an note application that will allow the user to navigate through a series of pages, in which the user will be able to:
-  -Write and save notes inside a SQL database.
-  -Perform updates, deletes and retrieval of notes.
-  -See the list of notes in the home page.
+  - Write and save notes inside a SQL database.
+  - Perform updates, deletes and retrieval of notes.
+  - See the list of notes in the home page.
 
 * The objective of the project is to push my knowledge and understanding of the PHP language that I'm studying in my vocational training's second year, and to learn from the common mistakes, problems and other complexities that can rise during the process of coding.
 
