@@ -1,5 +1,4 @@
-* Create readme.md
-This project is an note application that will allow the user to navigate through a series of pages, in which the user will be able to:
+* This project is an note application that will allow the user to navigate through a series of pages, in which the user will be able to:
   -Write and save notes inside a SQL database.
   -Perform updates, deletes and retrieval of notes.
   -See the list of notes in the home page.
