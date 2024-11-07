@@ -1,7 +1,5 @@
 <html>
-
 <head></head>
-
 <body>
     <?php
     $name = htmlspecialchars($_POST['name']);
@@ -12,5 +10,4 @@
     }
     ?>
 </body>
-
 </html>
