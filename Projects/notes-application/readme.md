@@ -11,4 +11,4 @@
   - I have successfully created the Note class which allows me to create a note object and through inheritance, use the connection method to store the note inside        the database through the save method.
   - I have successfully created a basic form and form validation with some basic css to allow the user to create notes.
 
-  * For the moment I will place the project in standby and I will focus my activities on learning more about PHP and complete other minor exercises in other to           practice, get a better understanding of the PDO and POO in PHP and acquire better practices to have an effective, clean and secure code.
+  * For the moment I will place the project in standby and I will focus my activities on learning more about PHP and complete other minor exercises in order to           practice, get a better understanding of the PDO and POO in PHP and acquire better practices to have an effective, clean and secure code.
