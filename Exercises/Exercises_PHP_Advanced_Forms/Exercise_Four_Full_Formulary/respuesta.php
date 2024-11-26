@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
 
-<head></head>
+<head>
+    <style>
+        .bolded {
+            font-weight: bold;
+        }
+    </style>
+</head>
 
 <body>
     <?php
     session_start();
-    echo "<p>Nombre: " . $_SESSION['nombre'] . "</p>";
-    echo "<p>Apellidos: " . $_SESSION['apellidos'] . "</p>";
-    echo "<p>Estado civil: " . $_SESSION['estadoCivil'] .  "</p>";
-    echo "<p>Edad: " . $_SESSION['edad'] . "</p>";
-    echo "<p>Peso: " . $_SESSION['peso'] . "</p>";
+    echo "<p>Nombre: <span class='bolded'>" . $_SESSION['nombre'] . "</span></p>";
+    echo "<p>Apellidos: <span class='bolded'>" . $_SESSION['apellidos'] . "</span></p>";
+    echo "<p>Estado civil: <span class='bolded'>" . $_SESSION['estadoCivil'] .  "</span></p>";
+    echo "<p>Edad: <span class='bolded'>" . $_SESSION['edad'] . "</span></p>";
+    echo "<p>Peso: <span class='bolded'>" . $_SESSION['peso'] . "</span></p>";
     echo "<p>Aficiones:";
     foreach ($_SESSION['aficiones'] as $item) {
-        echo "-" . $item . ".";
+        echo "-<span class='bolded'>" . $item . "</span>.";
     }
     echo "</p>";
     session_destroy();

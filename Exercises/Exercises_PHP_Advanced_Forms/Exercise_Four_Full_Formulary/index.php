@@ -1,17 +1,8 @@
 <!DOCTYPE html>
-
 <?php
 session_start();
 $error = [" ", " ", " ", " "];
 $valid = true;
-
-if (isset($_POST['aficiones'])) {
-    foreach ($_POST['aficiones'] as $element) {
-        echo $element;
-    }
-}
-
-
 if (isset($_REQUEST['submit'])) {
     if (htmlspecialchars($_REQUEST['nombre']) == '') {
         $error[0] = '<span style="color:red">Ingrese nombre</span>';
@@ -53,8 +44,6 @@ if (isset($_REQUEST['submit'])) {
         exit;
     }
 }
-
-
 ?>
 <html>
 
@@ -117,7 +106,6 @@ if (isset($_REQUEST['submit'])) {
                     <input type="checkbox" name="aficiones[]" value="musica">Música</input>
                     <input type="checkbox" name="aficiones[]" value="television">Televisión</input>
                 </div>
-
             </td>
         </tr>
         <tr>
@@ -128,9 +116,6 @@ if (isset($_REQUEST['submit'])) {
 
         </tr>
     </table>
-
-
-
     </form>
 </body>
 
