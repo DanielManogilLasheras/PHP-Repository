@@ -5,12 +5,14 @@ session_start();
 $error = [" ", " ", " ", " "];
 $valid = true;
 
+if (isset($_POST['aficiones'])) {
+    foreach ($_POST['aficiones'] as $element) {
+        echo $element;
+    }
+}
+
 
 if (isset($_REQUEST['submit'])) {
-    $listaAfi = [];
-    foreach ($_POST['aficiones'] as $valor) {
-        echo $valor;
-    }
     if (htmlspecialchars($_REQUEST['nombre']) == '') {
         $error[0] = '<span style="color:red">Ingrese nombre</span>';
         $valid = false;
@@ -35,7 +37,6 @@ if (isset($_REQUEST['submit'])) {
         $error[3] = '<span style="color:red">*</span>';
         $valid = false;
     }
-    echo $_POST['aficiones'];
     if (htmlspecialchars($_REQUEST['edad']) == '') {
         $error[0] = '<span style="color:red">*</span>';
         $valid = false;
@@ -47,8 +48,6 @@ if (isset($_REQUEST['submit'])) {
         $_SESSION['peso'] = $_POST['peso'];
         $_SESSION['sexo'] = htmlspecialchars($_POST['sexo']);
         $_SESSION['estadoCivil'] = htmlspecialchars($_POST['estadoCivil']);
-
-
         $_SESSION['aficiones'] = $_POST['aficiones'];
         header("Location: respuesta.php");
         exit;
@@ -108,25 +107,16 @@ if (isset($_REQUEST['submit'])) {
             </td>
         </tr>
         <tr>
-            <td>
-                <label for="aficiones">Aficiones: </label> <?php echo $error[3] ?>
-                <div>
-                    <input type="checkbox" name="aficiones" id="cine" value="cine">
-                    <label for="cine">Cine</label>
-                    <input type="checkbox" name="aficiones" id="literatura" value="literatura">
-                    <label for="literatura">Literatura</label>
-                    <input type="checkbox" name="aficiones" id="tebeos" value="tebeos">
-                    <label for="tebeos">Tebeos</label><br />
-                    <input type="checkbox" name="aficiones" id="deporte" value="deporte">
-                    <label for="deporte">Deporte</label>
-                    <input type="checkbox" name="aficiones" id="musica" value="musica">
-                    <label for="musica">Musica</label>
-                    <input type="checkbox" name="aficiones" id="television" value="television">
-                    <label for="television">Televisión</label>
-                </div>
-
-            </td>
             <td colspan="2">
+                <label>Aficiones:</label> <?php echo $error[3] ?>
+                <div>
+                    <input type="checkbox" name="aficiones[]" id="cine" value="cine">Cine</input>
+                    <input type="checkbox" name="aficiones[]" value="literatura">Literatura</input>
+                    <input type="checkbox" name="aficiones[]" value="tebeos">Tebeos</input>
+                    <input type="checkbox" name="aficiones[]" value="deporte">Deporte</input>
+                    <input type="checkbox" name="aficiones[]" value="musica">Música</input>
+                    <input type="checkbox" name="aficiones[]" value="television">Televisión</input>
+                </div>
 
             </td>
         </tr>

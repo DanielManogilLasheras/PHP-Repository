@@ -13,7 +13,7 @@
     echo "<p>Peso: " . $_SESSION['peso'] . "</p>";
     echo "<p>Aficiones:";
     foreach ($_SESSION['aficiones'] as $item) {
-        echo $item . "| ";
+        echo "-" . $item . ".";
     }
     echo "</p>";
     session_destroy();
