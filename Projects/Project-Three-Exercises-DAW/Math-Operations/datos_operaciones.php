@@ -3,6 +3,7 @@
     <head></head>
     <body>
         <?php
+        try{
             $numeroUno=htmlspecialchars($_POST['numeroUno']) ;
             $numeroDos=htmlspecialchars($_POST['numeroDos']);
             $opSeleccionada=$_POST['operacion'];
@@ -24,6 +25,10 @@
                     echo "El resultado de dividir " .$numeroUno. " y " .$numeroDos. " es " .$result;
                 break;
             }
+        }catch(DivisionByZeroError $e){
+                header("location:operaciones.php?message=Not possible to divide by 0");
+            }
+        
 
         ?>
     </body>
