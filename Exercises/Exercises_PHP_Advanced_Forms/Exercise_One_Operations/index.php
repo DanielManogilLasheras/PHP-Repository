@@ -13,7 +13,6 @@ if (isset($_REQUEST['submit'])) {
 } else {
 ?>
     <html>
-
     <head>
         <meta charset="UTF-8">
     </head>
