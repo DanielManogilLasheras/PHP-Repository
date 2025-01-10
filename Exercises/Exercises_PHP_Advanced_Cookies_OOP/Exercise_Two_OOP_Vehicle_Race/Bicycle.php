@@ -3,7 +3,7 @@ include_once "Vehicle.php";
 class Bicycle extends Vehicle{
     public $gears;
     public function __construct($gears) {
-        parent::__construct(0,1);
+        parent::__construct();
         $this->gears = $gears;
     }
     public function wheelie(){
@@ -11,3 +11,4 @@ class Bicycle extends Vehicle{
         return $value;
     }
 }
+?>

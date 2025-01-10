@@ -1,24 +1,24 @@
 <?php
 class Vehicle{
-    public $km_total;
-    public $vehiclesCreated=0;
-    public $km_done=0;
+    public static $km_total = 0;
+    public static $vehiclesCreated=0;
+    public $km_done;
 
-    public function __construct($km_total , $vehiclesCreated) {
-        $this->$km_total += $km_total;
-        $this->$vehiclesCreated += $vehiclesCreated;
+    public function __construct() {
+        self::$vehiclesCreated++;
     }
-    public function getKmTotal(){
-        return $this->km_total;
+    public static function getKmTotal(){
+        return self::$km_total;
     }
-    public function getVehiclesCreated(){
-        return $this->vehiclesCreated;
+    public static function getVehiclesCreated(){
+        return  self::$vehiclesCreated;
     }
     public function getKmDone(){
         return $this->km_done;
     }
     public function runKm($km){
-        $this->km_total += $km;
+        self::$km_total += $km;
         $this->km_done += $km;
     }
 }
+?>
