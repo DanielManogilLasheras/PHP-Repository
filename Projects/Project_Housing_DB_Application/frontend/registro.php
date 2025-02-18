@@ -65,7 +65,7 @@ if (isset($_POST['registro'])) {
     if ($validated) {
         $connection = mysqli_connect("localhost", "root", "", "inmobiliaria")
             or die("Error al establecer conexión con la base de datos");
-        if($query = $connection->prepare("SELECT * FROM usuario WHERE correo = ?")){
+        if ($query = $connection->prepare("SELECT * FROM usuario WHERE correo = ?")) {
             $query->bind_param("s", $email);
             $query->execute();
             $result = $query->get_result();
@@ -73,14 +73,14 @@ if (isset($_POST['registro'])) {
             $query->close();
         }
         if ($result >= 1) {
-            $resultRegistro='<div class="alert alert-danger" role="alert">La dirección de correo coincide con una cuenta creada.</div>';
+            $resultRegistro = '<div class="alert alert-danger" role="alert">La dirección de correo coincide con una cuenta creada.</div>';
         } else {
             $nombreCompleto = $nombre . " " . $apellidos;
             $password = password_hash($password, PASSWORD_DEFAULT);
-            if($query = $connection->prepare("INSERT INTO usuario (nombres,correo,clave,tipo_usuario) VALUES (?,?,?,?)")){
+            if ($query = $connection->prepare("INSERT INTO usuario (nombres,correo,clave,tipo_usuario) VALUES (?,?,?,?)")) {
                 $query->bind_param("sssi", $nombreCompleto, $email, $password, $tipoUsuario);
                 if ($query->execute()) {
-                    $resultRegistro='<div class="alert alert-success" role="alert">
+                    $resultRegistro = '<div class="alert alert-success" role="alert">
                     Registro completado, puede  <a href="login.php" class="alert-link">iniciar sesión</a>.
                     </div>';
                     $query->close();
@@ -92,6 +92,7 @@ if (isset($_POST['registro'])) {
 }
 ?>
 <html lang="en">
+
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -99,7 +100,7 @@ if (isset($_POST['registro'])) {
 
 <body>
     <div class="container-md w-75 p-3" id="loginContainer">
-        <p><?php echo $resultRegistro?></p>
+        <p><?php echo $resultRegistro ?></p>
         <form action="registro.php" method="post" id="registroForm">
             <div class="mb-3">
                 <label for="nombre" class="form-label"><?php echo "Nombre:* " . $error[0] ?></label>
@@ -135,5 +136,5 @@ if (isset($_POST['registro'])) {
         </form>
     </div>
 </body>
-</html>
 
+</html>

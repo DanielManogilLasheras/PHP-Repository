@@ -1,22 +1,23 @@
 <?php
+include "../db/db.php";
 $error = "";
 if (isset($_POST['loginbtn'])) {
     $email = htmlspecialchars($_POST['emailLogin']);
     $password = htmlspecialchars($_POST['passLogin']);
-    $conexion = mysqli_connect("localhost", "root", "", "inmobiliaria")
+    $conexion = mysqli_connect($host, $userAdmin, $passAdmin, $db)
         or die("Error en la conexión con la base de datos");
     if ($query = $conexion->prepare("SELECT * FROM usuario WHERE correo = ?")) {
-        $query->bind_param("s",$email);
+        $query->bind_param("s", $email);
         $query->execute();
     } else {
         $error = "Error en base de datos, inténtelo más tarde.";
     }
     $query->store_result();
     if ($query->num_rows > 0) {
-    $query->bind_result($idQ,$nombreQ,$emailQ,$passwordQ,$tipoQ);
-    $query->fetch();
+        $query->bind_result($idQ, $nombreQ, $emailQ, $passwordQ, $tipoQ);
+        $query->fetch();
     }
-    if (password_verify($password,$passwordQ)) {
+    if (password_verify($password, $passwordQ)) {
         session_start();
         session_regenerate_id();
         $_SESSION['loggedin'] = TRUE;
@@ -27,19 +28,21 @@ if (isset($_POST['loginbtn'])) {
         mysqli_close($conexion);
         header("location: entry.php");
     } else {
-            $error = "No se ha encontrado ningún usuario con ese email o contraseña";
-        }
+        $error = "No se ha encontrado ningún usuario con ese email o contraseña";
     }
+}
 
 if (isset($_POST['home'])) {
     header("location: ../index.php");
 }
 ?>
 <html>
+
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="container-md w-75 p-3" id="loginContainer">
         <form action="login.php" method="post" id="loginform">
@@ -57,4 +60,5 @@ if (isset($_POST['home'])) {
         <h4><?php echo $error ?></h4>
     </div>
 </body>
+
 </html>
