@@ -1,11 +1,19 @@
 <?php
 include "../db/db.php";
 $error = "";
+session_start();
+//Comprobación de que si el usuario se ha logeado, sea devuelto al punto de entrada de la app
+if (isset($_SESSION['loggedin'])) {
+    header("location: entry.php");
+}
+//Acción de logeo
 if (isset($_POST['loginbtn'])) {
     $email = htmlspecialchars($_POST['emailLogin']);
     $password = htmlspecialchars($_POST['passLogin']);
+    //Conexión con base de datos
     $conexion = mysqli_connect($host, $userAdmin, $passAdmin, $db)
         or die("Error en la conexión con la base de datos");
+    //Preparar statement
     if ($query = $conexion->prepare("SELECT * FROM usuario WHERE correo = ?")) {
         $query->bind_param("s", $email);
         $query->execute();
@@ -13,10 +21,12 @@ if (isset($_POST['loginbtn'])) {
         $error = "Error en base de datos, inténtelo más tarde.";
     }
     $query->store_result();
+    //Si el usuario se encuentra se guardan sus datos
     if ($query->num_rows > 0) {
         $query->bind_result($idQ, $nombreQ, $emailQ, $passwordQ, $tipoQ);
         $query->fetch();
     }
+    //Si la pass coincide, se crea una sessión con los parametros necesarios
     if (password_verify($password, $passwordQ)) {
         session_start();
         session_regenerate_id();
@@ -28,10 +38,11 @@ if (isset($_POST['loginbtn'])) {
         mysqli_close($conexion);
         header("location: entry.php");
     } else {
+        //Falla autenticación por valores incorrectos
         $error = "No se ha encontrado ningún usuario con ese email o contraseña";
     }
 }
-
+//Redirigirse a home
 if (isset($_POST['home'])) {
     header("location: ../index.php");
 }

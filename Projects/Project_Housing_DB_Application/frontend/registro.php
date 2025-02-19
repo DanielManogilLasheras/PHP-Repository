@@ -1,4 +1,6 @@
 <?php
+include "../db/db.php";
+//Una función para validar email
 function validateEmail($email)
 {
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -6,29 +8,40 @@ function validateEmail($email)
     }
     return false;
 }
+//Una función para validar contraseña con REJEX
 function validatePassword($pass)
 {
-    return true;
-    $rejex = preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{,7}$/', $pass);
+    $rejex = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $pass);
     if (!$rejex) {
         return false;
     }
     return true;
 }
+function comparePasswords($pass, $confpass)
+{
+    if ($pass === $confpass) {
+        return true;
+    } else {
+        return false;
+    }
+}
+//Los errores se guardan en un array, que seran lanzados en el formulario, cada posición en su respectivo campo
 $error = array("", "", "", "", "", "");
 $resultRegistro = "";
+//Acción de ir al index
 if (isset($_POST['home'])) {
     header("location: ../index.php");
 }
 if (isset($_POST['registro'])) {
     $validated = true;
+    //Guardamos valores de formulario en variables y aplicamos medidas contra SQL injection
     $nombre = htmlspecialchars($_POST['nombreRegistro']);
     $apellidos = htmlspecialchars($_POST['apellidosRegistro']);
     $email = htmlspecialchars($_POST['emailRegistro']);
     $password = htmlspecialchars($_POST['passRegistro']);
-    $confpassword = htmlspecialchars($_POST['confpassRegistro']);
+    $confpass = htmlspecialchars($_POST['confpassRegistro']);
     $tipoUsuario = htmlspecialchars($_POST['tipoUserRegistro']);
-
+    //Validamos que todos los campos estén llenos y cumplan con los parámetros.
     if ($nombre == "") {
         $error[0] = "Hace falta un nombre";
         $validated = false;
@@ -51,11 +64,11 @@ if (isset($_POST['registro'])) {
         $error[3] = "La contraseña debe: Ser de 8 caracteres mínimo, incluir 1 mayúscula, 1 minúscula y 1 número";
         $validated = false;
     }
-    if ($confpassword == "") {
+    if ($confpass == "") {
         $error[4] = "Confirme contraseña";
         $validated = false;
-    } else if ($password != $confpassword) {
-        $error[4] == "Las contraseñas no coinciden";
+    } else if (!comparePasswords($password, $confpass)) {
+        $error[4] = "Las contraseñas no coinciden";
         $validated = false;
     }
     if ($tipoUsuario == 0) {
@@ -63,8 +76,10 @@ if (isset($_POST['registro'])) {
         $validated = false;
     }
     if ($validated) {
-        $connection = mysqli_connect("localhost", "root", "", "inmobiliaria")
+        //Establecemos conexión
+        $connection = mysqli_connect($host, $userAdmin, $passAdmin, $db)
             or die("Error al establecer conexión con la base de datos");
+        //Preparamos statement para comprobar si el usuario ya existe
         if ($query = $connection->prepare("SELECT * FROM usuario WHERE correo = ?")) {
             $query->bind_param("s", $email);
             $query->execute();
@@ -75,20 +90,25 @@ if (isset($_POST['registro'])) {
         if ($result >= 1) {
             $resultRegistro = '<div class="alert alert-danger" role="alert">La dirección de correo coincide con una cuenta creada.</div>';
         } else {
+            //Si no hay usuario ya creado, se procede a registrar el usuario, se junta el nombre y los apellidos para el campo nombres
             $nombreCompleto = $nombre . " " . $apellidos;
+            //Se configura un hash para la contraseña según los estándares de PHP por defecto.
             $password = password_hash($password, PASSWORD_DEFAULT);
+            //Se prepara statement
             if ($query = $connection->prepare("INSERT INTO usuario (nombres,correo,clave,tipo_usuario) VALUES (?,?,?,?)")) {
                 $query->bind_param("sssi", $nombreCompleto, $email, $password, $tipoUsuario);
+                //Ejecución de statement
                 if ($query->execute()) {
+                    //Éxito en el registro
                     $resultRegistro = '<div class="alert alert-success" role="alert">
                     Registro completado, puede  <a href="login.php" class="alert-link">iniciar sesión</a>.
                     </div>';
                     $query->close();
+                    mysqli_close($connection);
                 }
             }
         }
     }
-    mysqli_close($connection);
 }
 ?>
 <html lang="en">
