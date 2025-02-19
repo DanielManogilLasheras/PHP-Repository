@@ -104,7 +104,7 @@ if (isset($_POST['modificarbtn'])) {
             echo ' 
             <div class="row">
                 <div class="col-3 border-r-1">
-                <h4>Id de piso: ' . $idResult . '</h4>
+                <h4>Id de usuario: ' . $idResult . '</h4>
                     <p>Nombre: ' . $nombreResult . '</p>
                     <p>Correo: ' . $correoResult . '</p>
                     <p>Tipo de usuario: ' . $tipoResult . '</p>
