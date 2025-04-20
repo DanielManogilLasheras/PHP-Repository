@@ -1,0 +1,13 @@
+*{
+    margin:0;
+    padding: 0;
+}
+html{
+    width:100%;
+    min-height: 100%;
+    height:auto;
+    font-family: monospace;
+}
+.card-header {
+    background-color: #fbe839!important; 
+  }

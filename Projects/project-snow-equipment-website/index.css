@@ -1,0 +1,45 @@
+@media (max-width: 1100px) {
+    #content-cards .card{
+        margin: 0px 0px 0px 0px;
+    }
+
+}
+#content-phrase{
+    background:linear-gradient(to left,rgb(0,0,0,0.5), rgb(251, 232, 57,0.8), rgb(0,0,0,0.5));
+    text-align: center;
+}
+#content-phrase h2{
+    color:white;
+    font-weight: bolder;
+}
+#content-cards{
+    text-align: center;
+}
+#content-cards .card{
+    margin: 0px 80px 0px 80px;
+}
+#content-cards .card-title{
+    color:yellow;
+}
+#content-cards .card-text{
+    color:white;
+}
+#content-cards .card-link{
+    color:#fbe839;
+    text-decoration: none;
+}
+#content-cards .btn{
+    background: none;
+    font-weight: bolder;
+    padding-left: 2ex;
+    padding-right: 2ex;
+    padding-top:1ex;
+    padding-bottom:1ex;
+    border-radius: 3ex;
+    border: 0.2ex solid #fbe839;
+    font-size:2ex;
+    -webkit-border-radius: 3ex;
+    -moz-border-radius: 3ex;
+    -ms-border-radius: 3ex;
+    -o-border-radius: 3ex;
+}
